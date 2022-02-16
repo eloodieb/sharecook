@@ -1,22 +1,23 @@
 <?php
 
+include('database.php');
+
 function getAllRecipes()
 {
-	
-	$db = dbConnect();
 
-	$req = $db->query('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM recipes ORDER BY creation_date DESC LIMIT 0, 5');
+    $db = dbConnect();
 
-	return $req;
+    $req = $db->query('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM recipes ORDER BY creation_date DESC LIMIT 0, 5');
+
+    return $req;
 }
-
 
 function getOneRecipe($recipeId)
 {
-   
+
     $db = dbConnect();
 
-    $req = $db->prepare('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM recipes WHERE id = ?');
+    $req = $db->prepare('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM recipes WHERE id = ?');
     $req->execute(array($recipeId));
     $post = $req->fetch();
 
@@ -25,7 +26,7 @@ function getOneRecipe($recipeId)
 
 function addOneRecipe($title, $description, $image)
 {
-   
+
     $db = dbConnect();
     $recipes = $db->prepare('INSERT INTO recipes(title, description, image) VALUES(:title, :description, :image)');
     $recipes->execute(
@@ -36,44 +37,28 @@ function addOneRecipe($title, $description, $image)
         )
     );
 
-    return $db->lastInsertId();
-
+    return $recipes;
 }
 
 function deleteOneRecipe($recipeId)
 {
-   
-    $db = dbConnect();
- 
-    $req = $db->prepare('DELETE * FROM recipes WHERE id = ?');
-    $req->execute(array($recipeId));
-    $recipe = $req->fetch();
 
-    return $recipe;
+    $db = dbConnect();
+
+    $req = $db->query("DELETE FROM recipes where id = $recipeId");
 }
 
-function updateOneRecipe($recipeId)
+function updateOneRecipe($recipeId, $title, $description, $image)
 {
     $db = dbConnect();
 
-    $req = $db->prepare('INSERT INTO id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM recipes');
-    $req->execute(array($recipeId));
-    $recipe = $req->fetch();
-
-    return $recipe;
-}
-
-
-// Connexion à la BDD
-function dbConnect()
-{
-    try
-    {
-        $db = new PDO('mysql:host=localhost;dbname=sharecook;charset=utf8', 'root');
-        return $db;
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+    $req = $db->prepare('Update recipes set title = :title, description = :description, image = :image');
+    $req->execute(
+        array(
+            "id" => $recipeId,
+            "title" => $title,
+            "description" => $description,
+            "image" => $image
+        )
+    );
 }
