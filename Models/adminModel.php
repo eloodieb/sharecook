@@ -1,12 +1,12 @@
 <?php
 
-include('database.php');
+include_once('database.php');
 
 function getAdmin($username, $password)
 {
 
   $db = dbConnect();
-  $admin = $db->prepare('SELECT id FROM users WHERE username = :username AND password =  MD5(:password)');
+  $admin = $db->prepare('SELECT id FROM users WHERE username = :username AND password =  :password');
   $admin->execute(
     array(
       "username" => $username,

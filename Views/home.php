@@ -1,8 +1,6 @@
 <?php require('header.php'); ?>
 
 <div class="container">
-    <a class="btn btn-primary" href="index.php?action=displayAddRecipe" role="button">espace admin</a>
-
     <?php
     while ($data = $recipes->fetch()) {
     ?>

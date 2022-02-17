@@ -48,17 +48,17 @@ function deleteOneRecipe($recipeId)
     $req = $db->query("DELETE FROM recipes where id = $recipeId");
 }
 
-function updateOneRecipe($recipeId, $title, $description, $image)
+function updateOneRecipe($id, $title, $description, $image)
 {
     $db = dbConnect();
 
-    $req = $db->prepare('Update recipes set title = :title, description = :description, image = :image');
+    $req = $db->prepare('Update recipes set title = :title, description = :description, image = :image where id = :id');
     $req->execute(
         array(
-            "id" => $recipeId,
             "title" => $title,
             "description" => $description,
-            "image" => $image
+            "image" => $image,
+            "id" => $id
         )
     );
 }

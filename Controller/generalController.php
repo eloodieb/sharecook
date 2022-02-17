@@ -91,8 +91,8 @@ switch ($action) {
             $adminId = getAdmin($_POST['username'], $_POST['password']);
 
             if ($adminId > 0) {
-                $_SESSION['userId'] = $adminId;
-                echo $_SESSION['userId'];
+                $_SESSION['adminId'] = $adminId;
+                echo $_SESSION['adminId'];
                 header('Location: ?action=listRecipes');
             } else {
                 $errorMsg = "Wrong login and/or password.";
@@ -102,6 +102,16 @@ switch ($action) {
             header('Location: ?action=displayLogin');
             $errorMsg = "Identifiant ou mot de passe incorrectes";
         }
+
+        break;
+
+    case 'logout':
+
+        if (isset($_SESSION['adminId'])) {
+            unset($_SESSION['adminId']);
+            session_destroy();
+        }
+        header('Location: ?action=listRecipes');
 
         break;
 
