@@ -2,3 +2,25 @@
     background-color: #ff735c;
     border-color: #f8f9fa
 }
+
+.btn-primary:hover{
+    background-color: #f5573d;
+    border-color: #f8f9fa
+}
+
+.logo{
+    width: 110px;
+}
+
+.img-header-left{
+    padding-left: 120px;
+}
+
+.img-recipe{
+        max-width: 60%;
+}
+
+hr{
+    margin-left: 30%;
+    margin-right: 30%;
+}

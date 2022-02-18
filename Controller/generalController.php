@@ -29,19 +29,19 @@ function deleteRecipe()
 {
     deleteOneRecipe($_GET['id']);
 
-    require('Views/addRecipe.php');
+    require('Views/spaceAdmin.php');
 }
 
 function displayAddRecipe()
 {
     $recipes = getAllRecipes();
-    require('Views/addRecipe.php');
+    require('Views/spaceAdmin.php');
 }
 
 function updateRecipe()
 {
     updateOneRecipe($_GET['id'], $_POST['title'], $_POST['description'], $_POST['image']);
-    require('Views/addRecipe.php');
+    header('Location: ?action=displayAddRecipe');
 }
 
 function displayLogin()
@@ -81,7 +81,7 @@ switch ($action) {
 
         break;
 
-    case 'displayLogin':
+    case 'shareCookSpaceAdmin':
         displayLogin();
         break;
 
@@ -126,6 +126,7 @@ switch ($action) {
 
     case 'updateRecipe':
         updateRecipe();
+
         break;
 
     default:

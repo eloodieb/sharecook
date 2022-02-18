@@ -7,7 +7,7 @@ function getAllRecipes()
 
     $db = dbConnect();
 
-    $req = $db->query('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM recipes ORDER BY creation_date DESC LIMIT 0, 5');
+    $req = $db->query('SELECT id, title, description, image, DATE_FORMAT(creation_date, \'%d/%m/%Y \') AS creation_date_fr FROM recipes ORDER BY creation_date DESC LIMIT 0, 5');
 
     return $req;
 }

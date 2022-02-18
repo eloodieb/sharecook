@@ -4,15 +4,19 @@
     <p><a href="index.php" class="btn btn-primary">Retour</a></p>
 
     <div class="row my-4">
-        <div class="col-md-6">
-            <img src="<?= $recipe['image']; ?>" alt="" class="img-fluid">
+        <div class="col-12 text-center">
+            <img src="<?= $recipe['image']; ?>" alt="" class="img-fluid img-recipe shadow">
         </div>
-        <div class="col-md-6">
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
             <h2>
                 <?= htmlspecialchars($recipe['title']) ?>
             </h2>
-            <em>le <?= $recipe['creation_date_fr'] ?></em>
-            <p>
+            <HR>
+            <em>Créée le <?= $recipe['creation_date_fr'] ?></em>
+            <p class="mt-4">
                 <?= nl2br(htmlspecialchars($recipe['description'])) ?>
             </p>
         </div>

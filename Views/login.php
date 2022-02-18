@@ -11,7 +11,7 @@ include_once('header.php');
             <label for="password" class="form-label">Mot de passe</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-warning">Envoyer</button>
+        <button type="submit" class="btn btn-warning">Se connecter</button>
         <?php
         if (isset($errorMsg)) {
 
